@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+
 import { AlunoModule } from './aluno/aluno.module';
 import { ProfessorModule } from './professor/professor.module';
 import { FichaAlunoModule } from './ficha-aluno/ficha-aluno.module';
@@ -20,6 +23,10 @@ import { AuthModule } from './auth/auth.module';
       isGlobal: true,
     }),
 
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
+
     AlunoModule,
     ProfessorModule,
     FichaAlunoModule,
@@ -34,6 +41,7 @@ import { AuthModule } from './auth/auth.module';
     PagamentoModule,
     AuthModule,
   ],
+
   controllers: [],
   providers: [],
 })

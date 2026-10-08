@@ -10,6 +10,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:5500',
       'http://127.0.0.1:5500',
+      'https://titanfit.projetostit.com',
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
