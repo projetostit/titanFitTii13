@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Inicial - Titan Fit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+   <header class="topo">
+    
+    <a href="index.html"> <img src="fotos/logo_txt.png" alt="Titan Fit"></a>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+        <nav id="menu">
+            <div class="close-menu" onclick="toggleMenu()">✖</div>
+
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="servico.html">Serviços</a></li>
+                <li><a href="sobre-nos.html">Sobre Nós</a></li>
+                <li><a href="planos.html">Plano Premium</a></li>
+                <li><a href="login.html" data-open-login id="open-login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<main>
+    <section class="conteudo-ficha">
+        <div class="ficha-box">
+            <h2 class="titulo-ficha">Ficha Inicial</h2>
+            <p>Vamos personalizar seu treino</p>
+<form action="/ficha" method="post">
+
+    <!-- ✅ Campo hidden para passar o email -->
+    <input type="hidden" name="email" id="emailInput">
+
+    <div class="caixa-ficha">
+        <label for="idade">Idade</label>
+        <!-- ✅ Adicionado name="idade" -->
+        <input type="number" id="idade" name="idade" placeholder="Digite sua idade">
+    </div>
+
+    <div class="caixa-ficha">
+        <label for="altura">Altura</label>
+        <!-- ✅ Adicionado name="altura" -->
+        <input type="text" id="altura" name="altura" placeholder="Ex: 1,75">
+    </div>
+
+    <div class="caixa-ficha">
+        <label for="peso">Peso</label>
+        <!-- ✅ Adicionado name="peso" -->
+        <input type="text" id="peso" name="peso" placeholder="Ex: 70kg">
+    </div>
+
+    <div class="caixa-ficha">
+        <label for="objetivo">Objetivo</label>
+        <!-- ✅ Adicionado name="objetivo" -->
+        <select id="objetivo" name="objetivo">
+            <option value="">Selecione</option>
+            <option>Funcional</option>
+            <option>hipertrofia</option>
+            <option>Força máxima</option>
+            <option>Resistencia munscular</option>
+        </select>
+    </div>
+
+ 
+    <button type="submit" class="btn-ficha">Salvar ficha</button>
+</form>
+
+<script>
+    // Pega o email da URL e injeta no campo hidden
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('emailInput').value = params.get('email') || '';
+</script>
+        </div>
+    </section>
+</main>
+
+<script src="interacao.js"></script>
+
+</body>
+</html>

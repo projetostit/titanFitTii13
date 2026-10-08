@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Titan Fit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topo">
+     <a href="index.html"> <img src="fotos/logo_txt.png" alt="Titan Fit"></a>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+        <nav id="menu">
+            <div class="close-menu" onclick="toggleMenu()">✖</div>
+
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="servico.html">Serviços</a></li>
+                <li><a href="sobre-nos.html">Sobre Nós</a></li>
+                <li><a href="planos.html">Plano Premium</a></li>
+                <li><a href="login.html" data-open-login id="open-login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="conteudo-home">
+        <img src="fotos/cbum.cortado.png" alt="..." class="banner">
+
+        <section class="servicos-home">
+            <h2 class="titulo-home">
+                Nossos<span class="roxo"> Serviços</span>
+            </h2>
+
+            <div class="caixa-servico_home">
+                <div class="caixa-esquerda animar-servico">
+                    <p>
+                       <a href="servico.html"><img src="fotos/treinoP (2).png"></a> 
+                        Treinamento personalizado
+                    </p>
+                </div>
+
+                <div class="caixa-direita animar-servico">
+                    <p>
+                       <a href="servico.html"><img src="fotos/ajuda.png"></a> 
+                        Acompanhamento de profissionais
+                    </p>
+                </div>
+
+                <div class="caixa-esquerda animar-servico">
+                    <p>
+                       <a href="servico.html"> <img src="fotos/biblioteca.png"></a>
+                        Biblioteca de exercícios
+                    </p>
+                </div>
+
+                <div class="caixa-direita animar-servico">
+                    <p>
+                       <a href="servico.html"> <img src="fotos/IA.png"></a>
+                        Agente de IA
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre-nos">
+            <h2 class="titulo-sobrenos">
+                Nós<span class="cor-sobrenos"> Conheça</span>
+            </h2>
+
+            <div class="sobrenos-home">
+                <img src="fotos/Atleta_treinado.png" alt="">
+
+                <div class="text_sobrenos">
+                    <p>
+                        A TitanFit é um aplicativo que une tecnologia e personalização para ajudar pessoas a cuidar da
+                        saúde e evoluir nos treinos em qualquer lugar. Oferece treinos adaptados ao perfil e objetivos,
+                        acompanha resultados e incentiva hábitos saudáveis, promovendo bem-estar e constância.
+                    </p>
+
+                    <button>
+                        <a href="sobre-nos.html">Sobre nós</a>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+      <section class="caixa-planos_home">
+    <h2>
+        Planos <span class="laranja">TitanFit</span>
+    </h2>
+
+    <div class="planos-wrapper">
+        <button class="btn-plano" onclick="voltarPlano()">‹</button>
+
+        <div class="home-planos" id="carrosselPlanos">
+
+            <div class="plano_basico-home">
+                <h3>Plano Básico</h3>
+                <img src="fotos/planos.png" alt="Plano Básico">
+
+                <p class="preco">GRATUITO</p>
+
+                <button>
+                    <a href="planos.html">Saiba mais</a>
+                </button>
+            </div>
+
+            <div class="plano_avancado-home">
+                <h3>Plano Avançado</h3>
+                <img src="fotos/planos.png" alt="Plano Avançado">
+
+                <p class="preco">R$ 19,99</p>
+
+                <button>
+                    <a href="planos.html">Saiba mais</a>
+                </button>
+            </div>
+
+            <div class="plano_premium-home">
+                <h3>Plano Premium</h3>
+                <img src="fotos/planos.png" alt="Plano Premium">
+
+                <p class="preco">R$ 39,99</p>
+
+                <button>
+                    <a href="planos.html">Saiba mais</a>
+                </button>
+            </div>
+
+        </div>
+
+        <button class="btn-plano" onclick="proximoPlano()">›</button>
+    </div>
+</section>
+
+        <section class="baixo">
+            <div class="baixe_app">
+                <img src="fotos/baixe_nosso_app.png">
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-conteudo">
+
+            <div class="footer-nav">
+                <h3>navegação</h3>
+
+                <a href="index.html">Home</a>
+                <a href="servico.html">Serviços</a>
+                <a href="sobre-nos.html">Sobre Nós</a>
+                <a href="planos.html">Plano Premium</a>
+                <a href="login.html">Login</a>
+            </div>
+
+            <div class="footer-logo">
+                <img src="fotos/logo_txt.png" alt="Titan Fit">
+            </div>
+
+            <div class="footer-redes">
+                <h3>siga-nos em nossas redes sociais</h3>
+
+                <div class="icones-redes">
+                    <img src="fotos/insta.png" alt="Instagram">
+                    <img src="fotos/facebook.png" alt="Facebook">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-baixo">
+            <p>
+                desenvolvido por Luis Felipe, Pedro Henrique,
+                Pedro Gabriel e Heloisa
+                Site acadêmico | Todos os direitos reservados |
+                Senac LAPA TITO © 2026
+            </p>
+        </div>
+    </footer>
+
+    <script src="interacao.js"></script>
+
+</body>
+</html>

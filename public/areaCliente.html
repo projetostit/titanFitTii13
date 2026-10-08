@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Área do Cliente</title>
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <a href="index.html">
+            <img src="fotos/logo_txt.png" alt="Titan Fit">
+        </a>
+
+        <div class="menu-toggle" onclick="toggleMenu()">
+            ☰
+        </div>
+
+        <nav id="menu">
+
+            <div class="close-menu" onclick="toggleMenu()">
+                ✖
+            </div>
+
+            <ul>
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="servico.html">Serviços</a>
+                </li>
+
+                <li>
+                    <a href="sobre-nos.html">Sobre Nós</a>
+                </li>
+
+                <li>
+                    <a href="planos.html">Plano Premium</a>
+                </li>
+
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <main class="conteudo-areaCliente">
+
+        <section class="bemVindo-cliente">
+
+            <h1 id="nomeAluno">
+                Olá!
+            </h1>
+
+            <p>
+                Bem vindo(a) de volta, como podemos ajudar
+            </p>
+
+        </section>
+
+
+        <section class="sessao-cliente">
+
+            <div class="caixa-cliente">
+
+                <h3>
+                    próximo treino
+                </h3>
+
+                <p>
+                    Hoje às 18:00
+                </p>
+
+                <p>
+                    Treino A: peito e Tríceps
+                </p>
+
+                <button type="button">
+                    Visualizar treino
+                </button>
+
+            </div>
+
+
+            <div class="caixa-cliente">
+
+                <h3>
+                    Professor conectado
+                </h3>
+
+                <p>
+                    Prof. Flavio
+                </p>
+
+                <p>
+                    personal trainer
+                </p>
+
+                <button
+                    type="button"
+                    id="abrirModalProfessores"
+                >
+                    Se conectar
+                </button>
+
+            </div>
+
+
+            <div class="caixa-cliente">
+
+                <h3>
+                    Meu plano
+                </h3>
+
+                <p>
+                    Plano Premium
+                </p>
+
+                <p>
+                    Válido até 15/9/2026
+                </p>
+
+                <button
+                    type="button"
+                    id="abrirModalPlanos"
+                >
+                    Mudar plano
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="treinos-cliente">
+
+            <div class="treinos">
+
+                <div class="acordeon">
+
+                    <div class="acordeon-item">
+
+                        <button class="acordeon-titulo">
+
+                            Peitoral
+
+                            <span>+</span>
+
+                        </button>
+
+                        <div class="acordeon-conteudo">
+
+                            <p>
+                                ...
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="acordeon-item">
+
+                        <button class="acordeon-titulo">
+
+                            Costas
+
+                            <span>+</span>
+
+                        </button>
+
+                        <div class="acordeon-conteudo">
+
+                            <p>
+                                ...
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="acordeon-item">
+
+                        <button class="acordeon-titulo">
+
+                            Pernas
+
+                            <span>+</span>
+
+                        </button>
+
+                        <div class="acordeon-conteudo">
+
+                            <p>
+                                ...
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button class="visualizar-Treino">
+                    Visualizar Treino
+                </button>
+
+            </div>
+
+
+            <div class="acordeon">
+
+                <div class="acordeon-item">
+
+                    <button class="acordeon-titulo">
+
+                        Faturas
+
+                        <span>+</span>
+
+                    </button>
+
+                    <div class="acordeon-conteudo">
+
+                        <p>
+                            ...
+                        </p>
+
+                    </div>
+
+                </div>
+
+<div class="acordeon-item">
+
+    <div
+        class="acordeon-header"
+        onclick="toggleAcordeao(this)"
+    >
+        <span>Meus Dados</span>
+
+        <span class="acordeon-icon">
+            +
+        </span>
+    </div>
+
+    <div class="acordeon-conteudo">
+
+        <!-- NOME -->
+        <div class="ficha-dado">
+
+            <span class="ficha-label">
+                Nome
+            </span>
+
+            <span
+                class="ficha-valor"
+                id="dadosNome"
+            >
+                Não informado
+            </span>
+
+        </div>
+
+        <!-- E-MAIL -->
+        <div class="ficha-dado">
+
+            <span class="ficha-label">
+                E-mail
+            </span>
+
+            <span
+                class="ficha-valor"
+                id="dadosEmail"
+            >
+                Não informado
+            </span>
+
+        </div>
+
+        <!-- PROFESSOR CONECTADO -->
+        <div class="ficha-dado professor-conectado-dado">
+
+            <span class="ficha-label">
+                Professor conectado
+            </span>
+
+            <div id="professorConectado">
+
+                <span
+                    class="ficha-valor"
+                    id="professorNome"
+                >
+                    Nenhum professor conectado
+                </span>
+
+                <span
+                    class="ficha-valor"
+                    id="professorEspecialidade"
+                >
+                </span>
+
+                <button
+                    type="button"
+                    id="botaoConectarProfessor"
+                    class="botao-conectar-professor"
+                >
+                    Se conectar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FICHA
+===================================================== -->
+<!-- FICHA -->
+<div class="acordeon-item">
+
+    <div class="acordeon-header" onclick="toggleFicha()">
+        <span>Ficha</span>
+        <span id="iconeFicha">+</span>
+    </div>
+
+    <div class="acordeon-conteudo" id="conteudoFicha">
+
+        <div class="ficha-dado">
+            <span class="ficha-label">Peso</span>
+            <span class="ficha-valor" id="fichaPeso">Não informado</span>
+        </div>
+
+        <div class="ficha-dado">
+            <span class="ficha-label">Idade</span>
+            <span class="ficha-valor" id="fichaIdade">Não informado</span>
+        </div>
+
+        <div class="ficha-dado">
+            <span class="ficha-label">Altura</span>
+            <span class="ficha-valor" id="fichaAltura">Não informado</span>
+        </div>
+
+        <div class="ficha-dado">
+            <span class="ficha-label">Objetivo</span>
+            <span class="ficha-valor" id="fichaObjetivo">Não informado</span>
+        </div>
+
+        <!-- BOTÃO ALTERAR FICHA -->
+       <button
+    type="button"
+    class="botao-alterar-ficha"
+    onclick="abrirModalFicha()">
+    Alterar ficha
+    
+</button>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+               
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <div class="footer-conteudo">
+
+            <div class="footer-nav">
+
+                <h3>
+                    navegação
+                </h3>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="servico.html">
+                    Serviços
+                </a>
+
+                <a href="sobre-nos.html">
+                    Sobre Nós
+                </a>
+
+                <a href="planos.html">
+                    Plano Premium
+                </a>
+
+                <a href="login.html">
+                    login
+                </a>
+
+            </div>
+
+
+            <div class="footer-logo">
+
+                <img
+                    src="fotos/logo_txt.png"
+                    alt="Titan Fit"
+                >
+
+            </div>
+
+
+            <div class="footer-redes">
+
+                <h3>
+                    siga-nos em nossas redes sociais
+                </h3>
+
+                <div class="icones-redes">
+
+                    <img
+                        src="fotos/insta.png"
+                        alt="Instagram"
+                    >
+
+                    <img
+                        src="fotos/facebook.png"
+                        alt="Facebook"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-baixo">
+
+            <p>
+                desenvolvido por Luis Felipe,
+                Pedro Henrique, Pedro Gabriel e Heloisa
+
+                Site acadêmico |
+                Todos os direitos reservados |
+                Senac LAPA TITO © 2026
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         MODAL DE PLANOS
+    ====================================================== -->
+
+    <div
+        class="modal-planos"
+        id="modalPlanos"
+    >
+
+        <div class="modal-planos-caixa">
+
+            <div class="modal-planos-header">
+
+                <div>
+
+                    <h2>
+                        Escolha seu plano
+                    </h2>
+
+                    <p>
+                        Selecione o plano que deseja utilizar
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-planos-fechar"
+                    id="fecharModalPlanos"
+                    aria-label="Fechar"
+                >
+                    &times;
+                </button>
+
+            </div>
+
+
+            <div class="modal-planos-lista">
+
+
+                <!-- PLANO BÁSICO -->
+
+                <div class="modal-plano-card modal-plano-basico">
+
+                    <div class="modal-plano-conteudo">
+
+                        <h3>
+                            Plano Básico
+                        </h3>
+
+                        <h2>
+                            GRATUITO
+                        </h2>
+
+                        <ul>
+
+                            <li>
+                                Treinos básicos;
+                            </li>
+
+                            <li>
+                                Acompanhamento inicial;
+                            </li>
+
+                            <li>
+                                Exercícios essenciais;
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="modal-plano-botao"
+                        data-plano="basico"
+                    >
+                        ESCOLHER PLANO
+                    </button>
+
+                </div>
+
+
+                <!-- PLANO AVANÇADO -->
+
+                <div class="modal-plano-card modal-plano-avancado">
+
+                    <div class="modal-plano-conteudo">
+
+                        <h3>
+                            Plano Avançado
+                        </h3>
+
+                        <h2>
+                            R$ 19,99/Mês
+                        </h2>
+
+                        <ul>
+
+                            <li>
+                                Treinos mais avançados;
+                            </li>
+
+                            <li>
+                                Ajustes automáticos de treino;
+                            </li>
+
+                            <li>
+                                Relatórios detalhados;
+                            </li>
+
+                            <li>
+                                Suporte via chat;
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="modal-plano-botao"
+                        data-plano="avancado"
+                    >
+                        ESCOLHER PLANO
+                    </button>
+
+                </div>
+
+
+                <!-- PLANO PREMIUM -->
+
+                <div class="modal-plano-card modal-plano-premium">
+
+                    <div class="modal-plano-conteudo">
+
+                        <h3>
+                            Plano Premium
+                        </h3>
+
+                        <h2>
+                            R$ 39,99/Mês
+                        </h2>
+
+                        <ul>
+
+                            <li>
+                                Treinos VIP personalizados;
+                            </li>
+
+                            <li>
+                                Consultoria com especialistas;
+                            </li>
+
+                            <li>
+                                Evolução monitorada em tempo real;
+                            </li>
+
+                            <li>
+                                Relatórios completos de desempenho;
+                            </li>
+
+                            <li>
+                                Suporte via chat;
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="modal-plano-botao"
+                        data-plano="premium"
+                    >
+                        ESCOLHER PLANO
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MODAL DE PROFESSORES
+    ====================================================== -->
+
+    <div
+        class="modal-professores"
+        id="modalProfessores"
+    >
+
+        <div class="modal-professores-caixa">
+
+            <div class="modal-professores-header">
+
+                <div>
+
+                    <h2>
+                        Encontrar professor
+                    </h2>
+
+                    <p>
+                        Escolha um professor para se conectar
+                    </p>
+
+                </div>
+
+
+        <button
+    type="button"
+    class="modal-professores-fechar"
+    id="fecharModalProfessores"
+    aria-label="Fechar"
+>
+    &times;
+</button>
+
+            </div>
+
+
+            <!-- PROFESSORES VINDOS DO BACK-END -->
+
+            <div
+                id="listaProfessores"
+                class="lista-professores"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+     MODAL DE FICHA
+===================================================== -->
+
+<div id="modalFicha" class="modal-ficha">
+
+    <div class="conteudo-ficha">
+
+        <div class="ficha-box">
+
+            <button
+                type="button"
+                class="fechar-modal-ficha"
+                onclick="fecharModalFicha()">
+                ×
+            </button>
+
+            <h2 class="titulo-ficha">Alterar Ficha</h2>
+
+            <p>Atualize suas informações para personalizar seu treino</p>
+
+            <form id="formFicha">
+
+                <div class="caixa-ficha">
+
+                    <label for="modalIdade">
+                        Idade
+                    </label>
+
+                    <input
+                        type="number"
+                        id="modalIdade"
+                        name="idade"
+                        placeholder="Digite sua idade">
+
+                </div>
+
+                <div class="caixa-ficha">
+
+                    <label for="modalAltura">
+                        Altura
+                    </label>
+
+                    <input
+                        type="text"
+                        id="modalAltura"
+                        name="altura"
+                        placeholder="Ex: 1,75">
+
+                </div>
+
+                <div class="caixa-ficha">
+
+                    <label for="modalPeso">
+                        Peso
+                    </label>
+
+                    <input
+                        type="text"
+                        id="modalPeso"
+                        name="peso"
+                        placeholder="Ex: 70kg">
+
+                </div>
+
+                <div class="caixa-ficha">
+
+                    <label for="modalObjetivo">
+                        Objetivo
+                    </label>
+
+                    <select
+                        id="modalObjetivo"
+                        name="objetivo">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="Funcional">
+                            Funcional
+                        </option>
+
+                        <option value="Hipertrofia">
+                            Hipertrofia
+                        </option>
+
+                        <option value="Força máxima">
+                            Força máxima
+                        </option>
+
+                        <option value="Resistência muscular">
+                            Resistência muscular
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn-ficha">
+                    Salvar ficha
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="interacao.js"></script>
+
+    <script src="conexoes.js"></script>
+
+</body>
+
+</html>

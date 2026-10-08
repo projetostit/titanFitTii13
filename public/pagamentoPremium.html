@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title><link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    
+
+<header class="topo">
+   <a href="index.html"> <img src="fotos/logo_txt.png" alt="Titan Fit"></a>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <nav id="menu">
+    <div class="close-menu" onclick="toggleMenu()">✖</div>
+
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="servico.html">Serviços</a></li>
+      <li><a href="sobre-nos.html">Sobre Nós</a></li>
+      <li><a href="planos.html">Plano Premium</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+</header>
+    <section class="pagina-pagamento">
+
+    <div class="pagamento-esquerda">
+
+        <h1>Finalizar Assinatura</h1>
+        <p>Preencha os dados abaixo para concluir o pagamento.</p>
+
+        <div class="card-pagamento">
+
+            <h2>Dados de Cobrança</h2>
+
+            <div class="campo">
+                <label>Nome Completo</label>
+                <input type="text" placeholder="Digite seu nome">
+            </div>
+
+            <div class="campo">
+                <label>Número do Cartão</label>
+                <input type="text" placeholder="0000 0000 0000 0000">
+            </div>
+
+            <div class="linha">
+                <div class="campo">
+                    <label>Validade</label>
+                    <input type="text" placeholder="MM/AA">
+                </div>
+
+                <div class="campo">
+                    <label>CVV</label>
+                    <input type="text" placeholder="123">
+                </div>
+            </div>
+
+            <div class="campo">
+                <label>CPF</label>
+                <input type="text" placeholder="000.000.000-00">
+            </div>
+
+            <button class="btn-finalizar">
+                Finalizar Pagamento
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="pagamento-direita">
+
+        <div class="resumo-card">
+
+            <h2>Resumo do Pedido</h2>
+
+            <div class="resumo-item">
+                <span>Plano Premium</span>
+                <strong>R$ 39,99</strong>
+            </div>
+
+            <hr>
+
+            <div class="resumo-total">
+                <span>Total</span>
+                <strong>R$ 39,99</strong>
+            </div>
+
+        </div>
+
+        
+
+    </div>
+
+</section>
+
+  
+
+<footer class="footer">
+
+  <div class="footer-conteudo">
+
+    <div class="footer-nav">
+      <h3>Navegação</h3>
+
+      <a href="index.html">Home</a>
+      <a href="servico.html">Serviços</a>
+      <a href="sobre-nos.html">Sobre Nós</a>
+      <a href="planos.html">Plano Premium</a>
+      <a href="login.html">Login</a>
+    </div>
+
+    <div class="footer-logo">
+      <img src="fotos/logo_txt.png" alt="Titan Fit">
+    </div>
+
+    <div class="footer-redes">
+      <h3>Siga-nos em nossas redes sociais</h3>
+
+      <div class="icones-redes">
+        <img src="fotos/insta.png" alt="Instagram">
+        <img src="fotos/facebook.png" alt="Facebook">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-baixo">
+    <p>
+      Desenvolvido por Luis Felipe, Pedro Henrique,
+      Pedro Gabriel e Heloisa.
+      Site acadêmico | Todos os direitos reservados |
+      Senac LAPA TITO © 2026
+    </p>
+  </div>
+
+</footer>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  menu.classList.toggle("active");
+}
+</script>
+
+<script src="interacao.js"></script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - TitanFit</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <a href="index.html">
+
+            <img
+                src="fotos/logo_txt.png"
+                alt="Titan Fit"
+            >
+
+        </a>
+
+        <div
+            class="menu-toggle"
+            onclick="toggleMenu()"
+        >
+            ☰
+        </div>
+
+        <nav id="menu">
+
+            <div
+                class="close-menu"
+                onclick="toggleMenu()"
+            >
+                ✖
+            </div>
+
+            <ul>
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="servico.html">
+                        Serviços
+                    </a>
+                </li>
+
+                <li>
+                    <a href="sobre-nos.html">
+                        Sobre Nós
+                    </a>
+                </li>
+
+                <li>
+                    <a href="planos.html">
+                        Plano Premium
+                    </a>
+                </li>
+
+                <li>
+                    <a href="login.html">
+                        Login
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="conteudo-login">
+
+            <div class="login">
+
+                <h2 class="titulo-login">
+                    Login
+                </h2>
+
+                <p>
+                    Bem-vindo de volta
+                </p>
+
+
+                <!-- =================================================
+                     NOVO: ESCOLHA ALUNO / PROFESSOR
+                     Mantendo a classe antiga continuar-com
+                ================================================== -->
+
+                <div class="tipo-login">
+
+                    <button
+                        type="button"
+                        class="continuar-com botao-tipo ativo"
+                        data-tipo="aluno"
+                    >
+                        Aluno
+                    </button>
+
+                    <button
+                        type="button"
+                        class="continuar-com botao-tipo"
+                        data-tipo="professor"
+                    >
+                        Professor
+                    </button>
+
+                </div>
+
+                <input
+                    type="hidden"
+                    id="tipoLogin"
+                    value="aluno"
+                >
+
+
+                <!-- FORMULÁRIO DE LOGIN -->
+
+                <form id="formLogin">
+
+
+                    <div class="caixa-login">
+
+                        <label for="username-email">
+                            E-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            id="username-email"
+                            placeholder="Digite seu e-mail"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="caixa-senha">
+
+                        <label for="senha">
+                            Senha
+                        </label>
+
+                        <input
+                            type="password"
+                            name="senha"
+                            id="senha"
+                            placeholder="Digite sua senha"
+                            required
+                        >
+
+                    </div>
+
+
+                    <a href="recuperarSenha/recuperarSenha.html" class="esqueci-senha">
+    Esqueci minha senha
+</a>
+
+
+                    <!-- BOTÃO ANTIGO -->
+
+                    <button
+                        type="submit"
+                        class="botao-login"
+                    >
+                        Continuar
+                    </button>
+
+
+                    <!-- BOTÃO ANTIGO GOOGLE -->
+
+                    <button
+                        type="button"
+                        class="continuar-com"
+                    >
+
+                        <img
+                            src="fotos/logo_goglee.png"
+                            alt=""
+                        >
+
+                        Entrar com Google
+
+                    </button>
+
+
+                    <!-- BOTÃO ANTIGO FACEBOOK -->
+
+                    <button
+                        type="button"
+                        class="continuar-com"
+                    >
+
+                        <img
+                            src="fotos/facebookicon.png"
+                            alt=""
+                        >
+
+                        Entrar com Facebook
+
+                    </button>
+
+
+                    <p class="sem-conta">
+                        Não tem conta?
+                    </p>
+
+
+                    <a
+                        href="cadastro.html"
+                        class="cadastro"
+                    >
+                        Cadastre-se
+                    </a>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <div class="footer-conteudo">
+
+            <div class="footer-nav">
+
+                <h3>
+                    navegação
+                </h3>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="servico.html">
+                    Serviços
+                </a>
+
+                <a href="sobre-nos.html">
+                    Sobre Nós
+                </a>
+
+                <a href="planos.html">
+                    Plano Premium
+                </a>
+
+                <a href="login.html">
+                    login
+                </a>
+
+            </div>
+
+
+            <div class="footer-logo">
+
+                <img
+                    src="fotos/logo_txt.png"
+                    alt="Titan Fit"
+                >
+
+            </div>
+
+
+            <div class="footer-redes">
+
+                <h3>
+                    siga-nos em nossas redes sociais
+                </h3>
+
+                <div class="icones-redes">
+
+                    <img
+                        src="fotos/insta.png"
+                        alt="Instagram"
+                    >
+
+                    <img
+                        src="fotos/facebook.png"
+                        alt="Facebook"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-baixo">
+
+            <p>
+                desenvolvido por Luis Felipe,
+                Pedro Henrique, Pedro Gabriel e Heloisa
+                Site acadêmico |
+                Todos os direitos reservados |
+                Senac LAPA TITO © 2026
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JS VISUAL -->
+
+    <script src="interacao.js"></script>
+
+
+    <!-- JS BACK-END -->
+
+    <script src="conexoes.js"></script>
+
+</body>
+
+</html>

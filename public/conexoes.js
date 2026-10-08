@@ -1,5 +1,5 @@
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://titanfit.projetostit.com";
 
 async function lerResposta(resposta) {
     const texto = await resposta.text();
