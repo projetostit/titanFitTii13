@@ -1,6 +1,108 @@
 
 const API_URL = "http://localhost:3000";
 
+// ==================================================
+// SESSÃO DO USUÁRIO — 24 HORAS
+// ==================================================
+
+const TEMPO_SESSAO = 24 * 60 * 60 * 1000;
+
+function criarSessao() {
+    localStorage.setItem(
+        "inicio_sessao",
+        Date.now().toString()
+    );
+}
+
+function sessaoValida() {
+    const token = localStorage.getItem("token");
+    const inicioSessao = localStorage.getItem("inicio_sessao");
+
+    if (!token || !inicioSessao) {
+        return false;
+    }
+
+    const tempoDecorrido =
+        Date.now() - Number(inicioSessao);
+
+    if (tempoDecorrido >= TEMPO_SESSAO) {
+        encerrarSessao();
+        return false;
+    }
+
+    return true;
+}
+
+function encerrarSessao() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("inicio_sessao");
+
+    localStorage.removeItem("tipo_usuario");
+
+    localStorage.removeItem("id_aluno");
+    localStorage.removeItem("nome_aluno");
+    localStorage.removeItem("email_aluno");
+    localStorage.removeItem("cpf_aluno");
+
+    localStorage.removeItem("id_professor");
+    localStorage.removeItem("nome_professor");
+    localStorage.removeItem("email_professor");
+}
+
+function redirecionarSeEstiverLogado() {
+    if (!sessaoValida()) {
+        return;
+    }
+
+    const tipoUsuario = localStorage.getItem("tipo_usuario");
+
+    if (tipoUsuario === "aluno") {
+        window.location.href = "areaCliente.html";
+        return;
+    }
+
+    if (tipoUsuario === "professor") {
+        window.location.href = "areaProfessor.html";
+    }
+}
+
+function atualizarMenuUsuario() {
+    const linkLogin = document.getElementById("linkLogin");
+    const linkUsuario = document.getElementById("linkUsuario");
+
+    if (!linkLogin || !linkUsuario) {
+        return;
+    }
+
+    if (!sessaoValida()) {
+        linkLogin.style.display = "block";
+        linkUsuario.style.display = "none";
+        return;
+    }
+
+    const tipoUsuario = localStorage.getItem("tipo_usuario");
+
+    if (tipoUsuario === "aluno" || tipoUsuario === "professor") {
+        linkLogin.style.display = "none";
+        linkUsuario.style.display = "flex";
+
+        linkUsuario.onclick = (event) => {
+            event.preventDefault();
+
+            if (tipoUsuario === "aluno") {
+                window.location.href = "areaCliente.html";
+            }
+
+            if (tipoUsuario === "professor") {
+                window.location.href = "areaProfessor.html";
+            }
+        };
+    } else {
+        linkLogin.style.display = "block";
+        linkUsuario.style.display = "none";
+    }
+}
+
 // =====================================================
 // FUNÇÕES AUXILIARES
 // =====================================================
@@ -349,11 +451,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 salvarDadosAluno(resultado.aluno);
-                localStorage.setItem("tipo_usuario", "aluno");
+localStorage.setItem("tipo_usuario", "aluno");
 
-                alert("Login realizado com sucesso!");
-                window.location.href = "areaCliente.html";
-                return;
+criarSessao();
+
+alert("Login realizado com sucesso!");
+
+window.location.href = "areaCliente.html";
             }
 
             if (tipo === "professor") {
@@ -363,10 +467,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 salvarDadosProfessor(resultado.professor);
-                localStorage.setItem("tipo_usuario", "professor");
 
-                alert("Login do professor realizado com sucesso!");
-                window.location.href = "areaProfessor.html";
+localStorage.setItem("tipo_usuario", "professor");
+
+criarSessao();
+
+alert("Login do professor realizado com sucesso!");
+
+window.location.href = "areaProfessor.html";
             }
         } catch (erro) {
             console.error("Erro no login:", erro);
@@ -374,6 +482,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
 
 // =====================================================
 // PROTEÇÃO DAS ÁREAS
@@ -1460,3 +1569,22 @@ function carregarSolicitacoesModalProfessor() {
         adicionarSolicitacaoNaLista(lista, solicitacao);
     });
 }
+
+if (window.location.pathname.endsWith("login.html")) {
+    redirecionarSeEstiverLogado();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    atualizarMenuUsuario();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const botaoSair = document.getElementById("botaoSair");
+
+    if (!botaoSair) return;
+
+    botaoSair.addEventListener("click", () => {
+        encerrarSessao();
+        window.location.href = "login.html";
+    });
+});

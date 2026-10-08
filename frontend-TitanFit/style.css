@@ -5663,3 +5663,107 @@ RESPONSIVO - CELULAR
     }
 
 }
+
+#menuUsuario {
+    display: flex;
+    align-items: center;
+}
+
+#linkUsuario {
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#linkUsuario img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+#menuUsuario {
+    display: flex;
+    align-items: center;
+}
+
+#linkUsuario {
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#linkUsuario img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* ==================================================
+   MENU SUPERIOR — ALINHAMENTO
+================================================== */
+
+#menu ul {
+    display: flex;
+    align-items: center;
+}
+
+#menu ul li {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#menu ul li a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* ITEM DO USUÁRIO */
+#menuUsuario {
+    display: flex;
+    align-items: center;
+}
+
+/* LINK DA FOTO */
+#linkUsuario {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* FOTO DO USUÁRIO */
+#linkUsuario img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+.area-sair {
+    width: min(1180px, calc(100% - 40px));
+    margin: 15px auto 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#botaoSair {
+    background: #f26807;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#botaoSair:hover {
+    background: #d95700;
+}
