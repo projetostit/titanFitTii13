@@ -332,7 +332,7 @@ async function cadastrarAluno(dados) {
         }
 
         salvarDadosAluno(resultado.aluno);
-        alert("Aluno cadastrado com sucesso!");
+       mostrarModalMensagem("Aluno cadastrado com sucesso!");
         window.location.href = "login.html";
     } catch (erro) {
         console.error("Erro ao cadastrar aluno:", erro);
@@ -376,7 +376,7 @@ async function cadastrarProfessor(dados) {
             return;
         }
 
-        alert("Professor cadastrado com sucesso!");
+        mostrarModalMensagem("Professor cadastrado com sucesso!");
         window.location.href = "login.html";
     } catch (erro) {
         console.error("Erro ao cadastrar professor:", erro);
@@ -477,7 +477,7 @@ localStorage.setItem("tipo_usuario", "professor");
 
 criarSessao();
 
-alert("Login do professor realizado com sucesso!");
+
 
 window.location.href = "areaProfessor.html";
             }
@@ -745,7 +745,6 @@ async function salvarFicha() {
             fecharModalFicha();
         }
 
-        alert(resultado.mensagem || "Ficha salva com sucesso!");
     } catch (erro) {
         console.error("Erro ao salvar ficha:", erro);
         alert("Não foi possível conectar ao servidor.");
@@ -1592,4 +1591,34 @@ document.addEventListener("DOMContentLoaded", () => {
         encerrarSessao();
         window.location.href = "login.html";
     });
+});
+
+function mostrarModalMensagem(mensagem) {
+    const modal = document.getElementById("modalMensagem");
+    const texto = document.getElementById("textoModalMensagem");
+
+    if (!modal || !texto) {
+        alert(mensagem);
+        return;
+    }
+
+    texto.textContent = mensagem;
+    modal.style.display = "flex";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("modalMensagem");
+    const fechar = document.getElementById("fecharModalMensagem");
+
+    if (fechar && modal) {
+        fechar.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        modal.addEventListener("click", (evento) => {
+            if (evento.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    }
 });
