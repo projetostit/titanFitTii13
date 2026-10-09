@@ -460,7 +460,7 @@ localStorage.setItem("tipo_usuario", "aluno");
 
 criarSessao();
 
-alert("Login realizado com sucesso!");
+
 
 window.location.href = "areaCliente.html";
             }
