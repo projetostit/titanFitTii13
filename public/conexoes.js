@@ -683,90 +683,191 @@ async function salvarFicha() {
         return;
     }
 
-    const idade = document.getElementById("modalIdade")?.value.trim() ?? "";
-    const altura = document.getElementById("modalAltura")?.value.trim().replace(",", ".") ?? "";
-    const peso = document.getElementById("modalPeso")?.value.trim().replace(",", ".") ?? "";
-    const objetivo = document.getElementById("modalObjetivo")?.value ?? "";
+    const campoIdade = document.getElementById("modalIdade");
+    const campoAltura = document.getElementById("modalAltura");
+    const campoPeso = document.getElementById("modalPeso");
+    const campoObjetivo = document.getElementById("modalObjetivo");
 
-    if (!idade || !altura || !peso || !objetivo) {
-        alert("Preencha todos os campos da ficha.");
+    if (!campoIdade || !campoAltura || !campoPeso || !campoObjetivo) {
+        console.error("Campos da ficha não encontrados.");
+        alert("Erro no formulário. Atualize a página e tente novamente.");
+        return;
+    }
+
+    const idadeTexto = campoIdade.value.trim();
+    const alturaTexto = campoAltura.value.trim().replace(",", ".");
+    const pesoTexto = campoPeso.value.trim().replace(",", ".");
+    const objetivo = campoObjetivo.value.trim();
+
+    const idade = Number(idadeTexto);
+    const altura = Number(alturaTexto);
+    const peso = Number(pesoTexto);
+
+    if (
+        idadeTexto === "" ||
+        !Number.isInteger(idade) ||
+        idade <= 0
+    ) {
+        alert("Informe uma idade válida.");
+        campoIdade.focus();
+        return;
+    }
+
+    if (
+        alturaTexto === "" ||
+        !Number.isFinite(altura) ||
+        altura <= 0
+    ) {
+        alert("Informe uma altura válida. Exemplo: 1,75.");
+        campoAltura.focus();
+        return;
+    }
+
+    if (
+        pesoTexto === "" ||
+        !Number.isFinite(peso) ||
+        peso <= 0
+    ) {
+        alert("Informe um peso válido em kg. Exemplo: 70,5.");
+        campoPeso.focus();
+        return;
+    }
+
+    if (!objetivo) {
+        alert("Selecione um objetivo.");
+        campoObjetivo.focus();
         return;
     }
 
     const dados = {
         id_aluno: Number(idAluno),
-        idade: Number(idade),
-        altura: Number(altura),
-        peso: Number(peso),
+        idade,
+        altura,
+        peso,
         objetivo
     };
 
-    console.log("Dados da ficha enviados:", dados);
-
     try {
-        const respostaBusca = await fetch(`${API_URL}/ficha-aluno/aluno/${idAluno}`, {
-            method: "GET",
-            headers: obterHeadersAutenticacao()
-        });
+        // Verifica se o aluno já possui uma ficha
+        const respostaBusca = await fetch(
+            `${API_URL}/ficha-aluno/aluno/${idAluno}`,
+            {
+                method: "GET",
+                headers: obterHeadersAutenticacao()
+            }
+        );
 
         const fichaAtual = await lerResposta(respostaBusca);
-        let respostaSalvar;
 
-        const fichaExiste =
-            respostaBusca.ok &&
-            !fichaAtual.mensagem &&
-            Boolean(normalizarFicha(fichaAtual)?.id_ficha);
+        console.log("Status da busca:", respostaBusca.status);
+        console.log("Ficha atual:", fichaAtual);
 
-        if (fichaExiste) {
-            respostaSalvar = await fetch(`${API_URL}/ficha-aluno/aluno/${idAluno}`, {
-                method: "PUT",
-                headers: obterHeadersAutenticacao(),
-                body: JSON.stringify(dados)
-            });
-        } else {
-            respostaSalvar = await fetch(`${API_URL}/ficha-aluno`, {
-                method: "POST",
-                headers: obterHeadersAutenticacao(),
-                body: JSON.stringify(dados)
-            });
-        }
-
-        const resultado = await lerResposta(respostaSalvar);
-        console.log("Resposta ao salvar ficha:", resultado);
-
-        if (!respostaSalvar.ok || resultado.mensagem === "Ficha não encontrada") {
-            alert(obterMensagemErro(resultado, "Não foi possível salvar a ficha."));
+        // Se a busca falhar por um erro diferente de ficha inexistente,
+        // não tenta criar outra ficha automaticamente.
+        if (
+            !respostaBusca.ok &&
+            fichaAtual.mensagem !== "Ficha não encontrada"
+        ) {
+            alert(
+                obterMensagemErro(
+                    fichaAtual,
+                    "Não foi possível verificar a ficha existente."
+                )
+            );
             return;
         }
 
-        mostrarDadosFicha(normalizarFicha(resultado));
+        const ficha = normalizarFicha(fichaAtual);
 
+        const fichaExiste =
+            respostaBusca.ok &&
+            ficha &&
+            typeof ficha === "object" &&
+            (
+                ficha.id_ficha !== undefined ||
+                ficha.id !== undefined
+            );
+
+        // Atualiza a ficha existente ou cria uma nova
+        const url = fichaExiste
+            ? `${API_URL}/ficha-aluno/aluno/${idAluno}`
+            : `${API_URL}/ficha-aluno`;
+
+        const metodo = fichaExiste ? "PUT" : "POST";
+
+        const respostaSalvar = await fetch(url, {
+            method: metodo,
+            headers: obterHeadersAutenticacao(),
+            body: JSON.stringify(dados)
+        });
+
+        const resultado = await lerResposta(respostaSalvar);
+
+        console.log("Método utilizado:", metodo);
+        console.log("Status ao salvar:", respostaSalvar.status);
+        console.log("Resposta ao salvar:", resultado);
+
+        if (!respostaSalvar.ok) {
+            alert(
+                obterMensagemErro(
+                    resultado,
+                    `Não foi possível salvar a ficha. Erro HTTP ${respostaSalvar.status}.`
+                )
+            );
+            return;
+        }
+
+        // Atualiza os dados exibidos na página
+        const fichaSalva = normalizarFicha(resultado);
+
+        if (
+            fichaSalva &&
+            typeof fichaSalva === "object" &&
+            (
+                fichaSalva.idade !== undefined ||
+                fichaSalva.altura !== undefined ||
+                fichaSalva.peso !== undefined ||
+                fichaSalva.objetivo !== undefined
+            )
+        ) {
+            mostrarDadosFicha(fichaSalva);
+        } else {
+            await carregarFicha();
+        }
+
+        // Fecha o modal
         if (typeof fecharModalFicha === "function") {
             fecharModalFicha();
         }
 
+        alert("Ficha salva com sucesso!");
+
     } catch (erro) {
         console.error("Erro ao salvar ficha:", erro);
-        alert("Não foi possível conectar ao servidor.");
+        alert("Não foi possível conectar ao servidor. Tente novamente.");
     }
 }
 
+// =====================================================
+// EVENTOS DA FICHA
+// =====================================================
+
 document.addEventListener("DOMContentLoaded", () => {
     const formFicha = document.getElementById("formFicha");
-    if (!formFicha) return;
 
-    formFicha.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        await salvarFicha();
-    });
-});
+    if (formFicha) {
+        formFicha.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            await salvarFicha();
+        });
+    }
 
-document.addEventListener("DOMContentLoaded", () => {
-    if (window.location.pathname.split("/").pop() === "areaCliente.html") {
+    const paginaAtual = window.location.pathname.split("/").pop();
+
+    if (paginaAtual === "areaCliente.html") {
         carregarFicha();
     }
 });
-
 // =====================================================
 // CARREGAR PROFESSORES
 // GET /professor
