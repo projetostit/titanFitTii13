@@ -144,52 +144,216 @@ function obterMensagemErro(resultado, padrao) {
     return resultado?.mensagem || resultado?.message || padrao;
 }
 
-function normalizarFicha(resultado) {
-    if (!resultado || resultado.mensagem === "Ficha não encontrada") {
-        return null;
+
+function mostrarModalMensagem(mensagem, aoFechar = null) {
+
+    const modalExistente = document.getElementById("modal-mensagem-sucesso");
+
+    if (modalExistente) {
+
+        modalExistente.remove();
+
     }
 
-    return resultado.ficha ?? resultado;
-}
+    const modal = document.createElement("div");
 
-function salvarDadosAluno(aluno) {
-    if (!aluno) return;
+    modal.id = "modal-mensagem-sucesso";
 
-    const idAluno = aluno.id_aluno ?? aluno.id;
+    modal.innerHTML = `
+<div class="modal-sucesso-conteudo" role="dialog" aria-modal="true">
+<div class="modal-sucesso-icone">✓</div>
+<h2>Sucesso!</h2>
+<p class="modal-sucesso-mensagem"></p>
+<button type="button" class="modal-sucesso-botao">
 
-    if (idAluno !== undefined && idAluno !== null) {
-        localStorage.setItem("id_aluno", String(idAluno));
+                Continuar
+</button>
+</div>
+
+    `;
+
+    const estilo = document.createElement("style");
+
+    estilo.id = "estilo-modal-sucesso";
+
+    estilo.textContent = `
+
+        #modal-mensagem-sucesso {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 99999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, 0.75);
+
+            backdrop-filter: blur(5px);
+
+            font-family: Arial, sans-serif;
+
+        }
+
+        .modal-sucesso-conteudo {
+
+            width: 100%;
+
+            max-width: 380px;
+
+            padding: 32px 24px;
+
+            text-align: center;
+
+            background: #262626;
+
+            color: #fff;
+
+            border: 1px solid #414141;
+
+            border-radius: 18px;
+
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+
+            animation: modalSucessoEntrada 0.25s ease;
+
+        }
+
+        .modal-sucesso-icone {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 66px;
+
+            height: 66px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: rgba(86, 192, 73, 0.15);
+
+            border: 2px solid #56c049;
+
+            color: #56c049;
+
+            font-size: 38px;
+
+            font-weight: bold;
+
+        }
+
+        .modal-sucesso-conteudo h2 {
+
+            margin: 0 0 12px;
+
+            font-size: 24px;
+
+            color: #fff;
+
+        }
+
+        .modal-sucesso-mensagem {
+
+            margin: 0 0 24px;
+
+            color: #d1d1d1;
+
+            font-size: 16px;
+
+            line-height: 1.5;
+
+        }
+
+        .modal-sucesso-botao {
+
+            width: 100%;
+
+            padding: 13px 20px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #7c3aed;
+
+            color: #fff;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: background 0.2s ease;
+
+        }
+
+        .modal-sucesso-botao:hover {
+
+            background: #6d28d9;
+
+        }
+
+        @keyframes modalSucessoEntrada {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(10px) scale(0.97);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0) scale(1);
+
+            }
+
+        }
+
+    `;
+
+    if (!document.getElementById("estilo-modal-sucesso")) {
+
+        document.head.appendChild(estilo);
+
     }
 
-    if (aluno.nome) {
-        localStorage.setItem("nome_aluno", aluno.nome);
-    }
+    modal.querySelector(".modal-sucesso-mensagem").textContent = mensagem;
 
-    if (aluno.email) {
-        localStorage.setItem("email_aluno", aluno.email);
-    }
+    document.body.appendChild(modal);
 
-    if (aluno.cpf) {
-        localStorage.setItem("cpf_aluno", aluno.cpf);
-    }
-}
+    const botao = modal.querySelector(".modal-sucesso-botao");
 
-function salvarDadosProfessor(professor) {
-    if (!professor) return;
+    botao.addEventListener("click", () => {
 
-    const idProfessor = professor.id_professor ?? professor.id;
+        modal.remove();
 
-    if (idProfessor !== undefined && idProfessor !== null) {
-        localStorage.setItem("id_professor", String(idProfessor));
-    }
+        if (typeof aoFechar === "function") {
 
-    if (professor.nome) {
-        localStorage.setItem("nome_professor", professor.nome);
-    }
+            aoFechar();
 
-    if (professor.email) {
-        localStorage.setItem("email_professor", professor.email);
-    }
+        }
+
+    });
+
+    botao.focus();
+
 }
 
 // =====================================================
@@ -331,10 +495,219 @@ async function cadastrarAluno(dados) {
             return;
         }
 
-        salvarDadosAluno(resultado.aluno);
-       mostrarModalMensagem("Aluno cadastrado com sucesso!");
-        window.location.href = "login.html";
-    } catch (erro) {
+
+
+function mostrarModalMensagem(mensagem, aoFechar = null) {
+
+    const modalExistente = document.getElementById("modal-mensagem-sucesso");
+
+    if (modalExistente) {
+
+        modalExistente.remove();
+
+    }
+
+    const modal = document.createElement("div");
+
+    modal.id = "modal-mensagem-sucesso";
+
+    modal.innerHTML = `
+<div class="modal-sucesso-conteudo" role="dialog" aria-modal="true">
+<div class="modal-sucesso-icone">✓</div>
+<h2>Sucesso!</h2>
+<p class="modal-sucesso-mensagem"></p>
+<button type="button" class="modal-sucesso-botao">
+
+                Continuar
+</button>
+</div>
+
+    `;
+
+    const estilo = document.createElement("style");
+
+    estilo.id = "estilo-modal-sucesso";
+
+    estilo.textContent = `
+
+        #modal-mensagem-sucesso {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 99999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, 0.75);
+
+            backdrop-filter: blur(5px);
+
+            font-family: Arial, sans-serif;
+
+        }
+
+        .modal-sucesso-conteudo {
+
+            width: 100%;
+
+            max-width: 380px;
+
+            padding: 32px 24px;
+
+            text-align: center;
+
+            background: #262626;
+
+            color: #fff;
+
+            border: 1px solid #414141;
+
+            border-radius: 18px;
+
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+
+            animation: modalSucessoEntrada 0.25s ease;
+
+        }
+
+        .modal-sucesso-icone {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 66px;
+
+            height: 66px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: rgba(86, 192, 73, 0.15);
+
+            border: 2px solid #56c049;
+
+            color: #56c049;
+
+            font-size: 38px;
+
+            font-weight: bold;
+
+        }
+
+        .modal-sucesso-conteudo h2 {
+
+            margin: 0 0 12px;
+
+            font-size: 24px;
+
+            color: #fff;
+
+        }
+
+        .modal-sucesso-mensagem {
+
+            margin: 0 0 24px;
+
+            color: #d1d1d1;
+
+            font-size: 16px;
+
+            line-height: 1.5;
+
+        }
+
+        .modal-sucesso-botao {
+
+            width: 100%;
+
+            padding: 13px 20px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #7c3aed;
+
+            color: #fff;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: background 0.2s ease;
+
+        }
+
+        .modal-sucesso-botao:hover {
+
+            background: #6d28d9;
+
+        }
+
+        @keyframes modalSucessoEntrada {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(10px) scale(0.97);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0) scale(1);
+
+            }
+
+        }
+
+    `;
+
+    if (!document.getElementById("estilo-modal-sucesso")) {
+
+        document.head.appendChild(estilo);
+
+    }
+
+    modal.querySelector(".modal-sucesso-mensagem").textContent = mensagem;
+
+    document.body.appendChild(modal);
+
+    const botao = modal.querySelector(".modal-sucesso-botao");
+
+    botao.addEventListener("click", () => {
+
+        modal.remove();
+
+        if (typeof aoFechar === "function") {
+
+            aoFechar();
+
+        }
+
+    });
+
+    botao.focus();
+
+}
+} catch (erro) {
         console.error("Erro ao cadastrar aluno:", erro);
         alert("Não foi possível conectar ao servidor.");
     }
@@ -376,8 +749,9 @@ async function cadastrarProfessor(dados) {
             return;
         }
 
-        mostrarModalMensagem("Professor cadastrado com sucesso!");
-        window.location.href = "login.html";
+        mostrarModalMensagem("Professor cadastrado com sucesso!", () => {
+    window.location.href = "login.html";
+});
     } catch (erro) {
         console.error("Erro ao cadastrar professor:", erro);
         alert("Não foi possível conectar ao servidor.");
@@ -462,8 +836,9 @@ criarSessao();
 
 
 
-window.location.href = "areaCliente.html";
-            }
+mostrarModalMensagem("Login realizado com sucesso!", () => {
+    window.location.href = "areaCliente.html";
+});            }
 
             if (tipo === "professor") {
                 if (!resultado.professor) {
@@ -479,8 +854,9 @@ criarSessao();
 
 
 
-window.location.href = "areaProfessor.html";
-            }
+mostrarModalMensagem("Login realizado com sucesso!", () => {
+    window.location.href = "areaProfessor.html";
+});            }
         } catch (erro) {
             console.error("Erro no login:", erro);
             alert("Não foi possível conectar ao servidor.");
@@ -696,12 +1072,7 @@ async function salvarFicha() {
 
     const idadeTexto = campoIdade.value.trim();
     const alturaTexto = campoAltura.value.trim().replace(",", ".");
-    const pesoTexto = campoPeso.value
-    .trim()
-    .toLowerCase()
-    .replace(/kg/g, "")
-    .replace(",", ".")
-    .trim();
+    const pesoTexto = campoPeso.value.trim().replace(",", ".");
     const objetivo = campoObjetivo.value.trim();
 
     const idade = Number(idadeTexto);
