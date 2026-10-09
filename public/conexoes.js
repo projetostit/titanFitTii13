@@ -268,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (senha !== confirmarSenha) {
-            alert("As senhas não coincidem.");
+            alert("As senhas não coinciden.");
             return;
         }
 
