@@ -696,7 +696,12 @@ async function salvarFicha() {
 
     const idadeTexto = campoIdade.value.trim();
     const alturaTexto = campoAltura.value.trim().replace(",", ".");
-    const pesoTexto = campoPeso.value.trim().replace(",", ".");
+    const pesoTexto = campoPeso.value
+    .trim()
+    .toLowerCase()
+    .replace(/kg/g, "")
+    .replace(",", ".")
+    .trim();
     const objetivo = campoObjetivo.value.trim();
 
     const idade = Number(idadeTexto);
