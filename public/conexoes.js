@@ -437,10 +437,15 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Status do login:", resposta.status);
             console.log("Resposta do login:", resultado);
 
-            if (!resposta.ok || !resultado.token) {
-                alert(obterMensagemErro(resultado, "E-mail ou senha incorretos."));
-                return;
-            }
+           if (!resposta.ok || !resultado.token) {
+    alert(
+        obterMensagemErro(
+            resultado,
+            "E-mail ou senha incorretos."
+        )
+    );
+    return;
+}
 
             localStorage.setItem("token", resultado.token);
 

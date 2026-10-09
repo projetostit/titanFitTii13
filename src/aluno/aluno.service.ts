@@ -100,13 +100,14 @@ export class AlunoService {
     );
 
     // E-mail não encontrado
-    if (alunos.length === 0) {
-      console.log('E-mail não encontrado');
+  // E-mail não encontrado no banco de dados
+if (alunos.length === 0) {
+    console.log('E-mail não cadastrado');
 
-      return {
-        mensagem: 'E-mail ou senha incorretos',
-      };
-    }
+    return {
+        mensagem: 'Este e-mail não está cadastrado. Faça seu cadastro para continuar.',
+    };
+}
 
     const aluno = alunos[0];
 
